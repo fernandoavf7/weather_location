@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Location from './location';
 import WeatherData from './WeatherData/weather_data';
 import transformWeather from '../services/transformWeather';
-
 import {
     CLOUD,
     CLOUDY,
@@ -12,25 +11,31 @@ import {
     WINDY
 } from '../constants/weather';
 
-import { api_weather } from './../constants/api_url';
+
 import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types';
+import getUrlWeatherByCity from '../services/getUrlWeatherByCity';
 
 const data = {
     temperature: 31,
     weatherState: SUN,
     humidity: 10,
-    wind: '20 m/s',
-    city: "Santiago"
+    wind: '20 m/s'
 }
 //ecma scrip 6, arrow function
 //constante nombre (parametros) arrow (retorno)
 //parentesis son para una sola linea, llaves para mas de una
 class WheatherLocation extends Component {
 
-    constructor() {
+    
+    constructor(props) {
         //siempre va super
-        super();
+        super(props);
+
+        const {city} = props;
+
         this.state = {
+            city,
             data: data
         };
         console.log("constructor");
@@ -55,6 +60,7 @@ class WheatherLocation extends Component {
 
 
     handleUpdateClick = () => {
+        const api_weather = getUrlWeatherByCity(this.state.city);
         fetch(api_weather).then(resolve => {
             //console.log(resolve);
 
@@ -73,11 +79,11 @@ class WheatherLocation extends Component {
 
     render() {
         console.log("render");
-        const { data } = this.state;
+        const { city, data } = this.state;
         return (
             <div className="App">
                 
-                <Location city={data.city}></Location>
+                <Location city={city}></Location>
                 
                 {data != null ?<WeatherData data ={data}></WeatherData>: <CircularProgress size={50}/>}
              
@@ -85,6 +91,10 @@ class WheatherLocation extends Component {
             </div>
         );
     }
+}
+
+WheatherLocation.propTypes = {
+    city: PropTypes.string.isRequired
 }
 
 
