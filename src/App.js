@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import WheaterLocation from './components/weather_location';
+import WheaterLocation from './components/index';
 
 class App extends Component {
   render() {
