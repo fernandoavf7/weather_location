@@ -88,7 +88,7 @@ class WheatherLocation extends Component {
                 
                 {data != null ?<WeatherData data ={data}></WeatherData>: <CircularProgress size={50}/>}
              
-                <button onClick={this.handleUpdateClick}>Actualizar</button>
+                <button className="btn bnt-primary" onClick={this.handleUpdateClick}>Actualizar</button>
             </div>
         );
     }
