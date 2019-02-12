@@ -80,6 +80,7 @@ class WheatherLocation extends Component {
     render() {
         console.log("render");
         const {onWeatherLocationClick} = this.props;
+        //console.log(onWeatherLocationClick);
         const { city, data } = this.state;
         return (
             <div className="weatherLocationCont" onClick={onWeatherLocationClick}>
@@ -88,7 +89,7 @@ class WheatherLocation extends Component {
                 
                 {data != null ?<WeatherData data ={data}></WeatherData>: <CircularProgress size={50}/>}
              
-                <button className="btn bnt-primary" onClick={this.handleUpdateClick}>Actualizar</button>
+                <button onClick={this.handleUpdateClick}>Actualizar</button>
             </div>
         );
     }

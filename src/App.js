@@ -7,21 +7,34 @@ import Paper from '@material-ui/core/Paper';
 import Appbar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import ForecastExtended from './components/forecast_extended';
 
 const cities = [
   "Santiago,cl",
-  "Bogota,col",
   "Mexico,mx",
   "Washington,us",
   "Madrid,es",
-  "Lima,pe"
 ];
 
 class App extends Component {
-  handleSelectedLocation = city => {
-    console.log(`handleSelectedLocation ${city}`);
+  constructor(){
+    super();
+
+    this.state = {
+      city: "Nueva Ciudad"
+    };
   }
+
+  //se crea un handler de seleccion
+   handleSelectedLocation = city => {
+    console.log(`handleSelectedLocation ${city}`);
+    this.setState( {
+      city : city
+    });
+  }
+
   render() {
+    const {city} = this.state;
     return (
       <Grid>
         <Row>
@@ -32,7 +45,7 @@ class App extends Component {
               </Typography>
             </Toolbar>
           </Appbar>
-       </Row>
+        </Row>
         <Row>
           <Col xs={12} md={6}>
             <LocationList
@@ -40,13 +53,12 @@ class App extends Component {
               onSelectedLocation={this.handleSelectedLocation} />
           </Col>
           <Col xs={12} md={6}>
-            <div className="details"></div>
+            <div className="details">
+              <ForecastExtended city={city}/>
+            </div>
           </Col>
         </Row>
-
       </Grid>
-
-
     );
   }
 }

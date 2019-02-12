@@ -38,7 +38,26 @@
 }
 
 .weatherLocationCont{
+  width: calc(100% - 20%);
+  margin-left: 10px;
+  margin-right: 10px;
   background: #f9fdea;
-  padding: 20px;
+  padding: 25px;
   margin: 10px;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 10px 10px 40px -12px rgba(0, 0, 0, 0.75);
+}
+
+.locationCont{
+  width: 100%;
+  height: 35px;
+  text-align: left;
+  color: #888;
+  line-height: 35px;
+  overflow: auto;
+}
+
+.locationCont h1{
+  margin: 0;
+  white-space: nowrap;
 }
