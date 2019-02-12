@@ -21,14 +21,14 @@ class App extends Component {
     super();
 
     this.state = {
-      city: "Nueva Ciudad"
+      city: null
     };
   }
 
   //se crea un handler de seleccion
    handleSelectedLocation = city => {
     console.log(`handleSelectedLocation ${city}`);
-    this.setState( {
+    this.setState({
       city : city
     });
   }
@@ -54,7 +54,8 @@ class App extends Component {
           </Col>
           <Col xs={12} md={6}>
             <div className="details">
-              <ForecastExtended city={city}/>
+            {city === null? null:   <ForecastExtended city={city}/>}
+            
             </div>
           </Col>
         </Row>
