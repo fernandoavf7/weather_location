@@ -79,9 +79,10 @@ class WheatherLocation extends Component {
 
     render() {
         console.log("render");
+        const {onWeatherLocationClick} = this.props;
         const { city, data } = this.state;
         return (
-            <div className="App">
+            <div className="weatherLocationCont" onClick={onWeatherLocationClick}>
                 
                 <Location city={city}></Location>
                 
@@ -93,8 +94,10 @@ class WheatherLocation extends Component {
     }
 }
 
+//para solicitar siempre un typo de dato, si no es proporcionado el tipo correcto no compilará
 WheatherLocation.propTypes = {
-    city: PropTypes.string.isRequired
+    city: PropTypes.string.isRequired,
+    onWeatherLocationClick: PropTypes.func,
 }
 
 
