@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import WheaterLocation from './components/index';
 import LocationList from './components/location_list';
 
 const cities = [
