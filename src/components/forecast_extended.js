@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ForecastItem from './forecast_item';
-import {api_key, url_base_forecast} from './../constants/api_url';
+import { api_key, url_base_forecast } from './../constants/api_url';
 import transformForecast from './../services/transformForecast';
+import { CircularProgress } from '@material-ui/core';
 
 const forecast_extended = {
     color: 'white',
@@ -33,9 +34,22 @@ class ForecastExtended extends Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
+        this.updateCity(this.props.city);
+    }
+
+    //para que se actualice el componente al seleccionar otra ciudad
+    //nextProps son las actualizaciones de las props
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.city !== this.props.city) {
+            this.setState({ forecastData: null });
+            this.updateCity(nextProps.city);
+        }
+    }
+
+    updateCity = city => {
         const url_forecast = `${url_base_forecast}?q=${this.props.city}&APPID=${api_key}`;
-       //trae datos
+        //trae datos
         fetch(url_forecast).then(
             //pasa a json
             data => (data.json())
@@ -48,18 +62,27 @@ class ForecastExtended extends Component {
                 this.setState({
                     forecastData: forecastData
                 });
-                
+
             }
         )
     }
 
-    renderForecastItemDays() {
-       return "Render Items";
-        //return days.map(day => <ForecastItem weekday={day} hour={10} key={day} data={data} />)
+    renderForecastItemDays(forecastData) {
+        return forecastData.map((forecast, index) =>
+            <ForecastItem
+                key={index}
+                weekday={forecast.weekday}
+                hour={forecast.hour}
+                data={forecast.data} />)
     }
 
-    renderProgress(){
-        return "Cargando Pronostico extendido";
+    renderProgress() {
+        return (
+            <div className="center">
+                <CircularProgress size={50} />
+                <h2>Cargando</h2>
+            </div>
+        );
     }
     render() {
         const { city } = this.props;
@@ -69,7 +92,7 @@ class ForecastExtended extends Component {
                 <div style={forecast_extended}>Pronostico Extendido para {city}</div>
 
                 {forecastData ?
-                    this.renderForecastItemDays() :
+                    this.renderForecastItemDays(forecastData) :
                     this.renderProgress()
                 }
             </div>
