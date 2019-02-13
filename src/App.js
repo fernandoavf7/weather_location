@@ -8,16 +8,16 @@ import Appbar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import ForecastExtended from './components/forecast_extended';
-import {createStore} from 'redux';
+import {setCity} from './actions/index';
+import {store} from './store/index';
 
 const cities = [
   "Santiago,cl",
-  "Mexico,mx",
+  "Chicago,us",
   "Washington,us",
   "Madrid,es",
 ];
 
-const store = createStore(() => {},window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 class App extends Component {
   constructor(){
@@ -34,8 +34,7 @@ class App extends Component {
       city : city
     });
     console.log(`handleSelectedLocation ${city}`);
-    const action = {type: "setCity", value: city};
-    store.dispatch(action);
+    store.dispatch(setCity(city));
   }
 
   render() {
