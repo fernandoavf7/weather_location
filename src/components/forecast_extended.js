@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ForecastItem from './forecast_item';
 import {api_key, url_base_forecast} from './../constants/api_url';
+import transformForecast from './../services/transformForecast';
 
 const forecast_extended = {
     color: 'white',
@@ -42,6 +43,10 @@ class ForecastExtended extends Component {
             //json extraido, lo imprime en consola
             weather_data => {
                 console.log(weather_data);
+                const forecastData = transformForecast(weather_data);
+                this.setState({
+                    forecastData: forecastData
+                });
             }
         )
     }
