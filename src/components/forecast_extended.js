@@ -11,20 +11,6 @@ const forecast_extended = {
     textAlign: 'center'
 }
 
-const days = [
-    "Lunes",
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes"
-];
-
-const data = {
-    temperature: 20,
-    weatherState: "normal",
-    humidity: 10,
-    wind: 'normal'
-}
 
 class ForecastExtended extends Component {
 
@@ -57,6 +43,7 @@ class ForecastExtended extends Component {
             //json extraido, lo imprime en consola
             weather_data => {
                 console.log(weather_data);
+  
                 const forecastData = transformForecast(weather_data);
                 console.log(forecastData);
                 this.setState({
@@ -78,12 +65,13 @@ class ForecastExtended extends Component {
 
     renderProgress() {
         return (
-            <div className="center">
+            <div>
                 <CircularProgress size={50} />
                 <h2>Cargando</h2>
             </div>
         );
     }
+
     render() {
         const { city } = this.props;
         const { forecastData } = this.state;
@@ -101,9 +89,7 @@ class ForecastExtended extends Component {
 }
 
 ForecastExtended.propTypes = {
-
     city: PropTypes.string.isRequired,
-
 }
 
 export default ForecastExtended;

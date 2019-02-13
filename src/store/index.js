@@ -2,7 +2,7 @@ import {createStore} from 'redux';
 import {city} from './../reducers/city';
 
 const initialState = {
-    city: "Buenos Arires,ar"
+    city: "London,uk"
 };
 
 
